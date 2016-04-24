@@ -42,7 +42,6 @@ class MainActivity : AppCompatActivity() {
                 )
                 people.add(person)
             }
-            people.sortBy { it.group }
             (recycler.adapter as DelegateAdapter).addGroups(groups)
             (recycler.adapter as DelegateAdapter).addPeople(people)
         }

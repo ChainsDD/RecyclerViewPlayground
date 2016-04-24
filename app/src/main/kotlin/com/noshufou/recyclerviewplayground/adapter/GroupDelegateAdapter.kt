@@ -13,11 +13,12 @@ import kotlinx.android.synthetic.main.item_group.view.*
 
 class GroupDelegateAdapter : ViewTypeDelegateAdapter {
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-        throw UnsupportedOperationException()
+        return GroupViewHolder(parent)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: ViewType) {
-        throw UnsupportedOperationException()
+        holder as GroupViewHolder
+        holder.bind(item as GroupItem)
     }
 
     class GroupViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(

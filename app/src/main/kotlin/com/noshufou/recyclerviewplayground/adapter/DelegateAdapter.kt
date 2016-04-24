@@ -40,15 +40,18 @@ class DelegateAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return this.items[position].getViewType()
     }
 
-    fun addPeople(people: List<PersonItem>) {
-        val positionStart = items.size
-        items.addAll(people)
-        notifyItemRangeInserted(positionStart, people.size)
-        Log.d("DelegateAdapter", "There are now ${items.size} People")
+    fun addPeople(people: MutableList<PersonItem>) {
+        people.sortBy { it.group }
+        val groupsInPeople = people.distinctBy { it.group }
+                .map { it.group }
+        for (group in groupsInPeople) {
+            items.addAll(items.indexOfFirst {it is GroupItem && it.id == group} + 1,
+                    people.filter { it.group == group })
+        }
     }
 
     fun addGroups(groups: List<GroupItem>) {
-        this.groups.addAll(groups)
+        items.addAll(groups)
     }
 
 }
