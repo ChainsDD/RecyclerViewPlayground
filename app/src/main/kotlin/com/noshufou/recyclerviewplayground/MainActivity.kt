@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import com.noshufou.recyclerviewplayground.adapter.AdapterConstants
 import com.noshufou.recyclerviewplayground.adapter.DelegateAdapter
 import com.noshufou.recyclerviewplayground.common.GroupItem
 import com.noshufou.recyclerviewplayground.common.PersonItem
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(it, "Replace with your own action", Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show() }
         recycler.layoutManager = LinearLayoutManager(this)
-        recycler.addItemDecoration(DividerDecoration(this))
+        recycler.addItemDecoration(DividerDecoration(this, AdapterConstants.PERSON))
 
         initAdapter()
 
