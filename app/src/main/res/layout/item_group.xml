@@ -3,5 +3,5 @@
     android:id="@+id/name"
     android:layout_width="match_parent" android:layout_height="wrap_content"
     android:text="Header"
-    android:background="@color/material_deep_teal_500"
+    android:background="@color/colorPrimaryLight"
     android:textAppearance="?android:attr/textAppearanceLarge" />
