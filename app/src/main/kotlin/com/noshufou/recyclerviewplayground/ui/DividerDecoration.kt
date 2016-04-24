@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.noshufou.recyclerviewplayground.R
+import com.noshufou.recyclerviewplayground.adapter.AdapterConstants
 
 /**
  * Created by Adam on 4/23/2016.
@@ -16,9 +17,8 @@ class DividerDecoration(context: Context) : RecyclerView.ItemDecoration() {
     val divider = ContextCompat.getDrawable(context, R.drawable.line_divider)
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-        val adapter = parent.adapter
         val position = parent.getChildAdapterPosition(view)
-        if (position != adapter.itemCount - 1) {
+        if (position != state.itemCount - 1) {
             outRect.bottom = divider.intrinsicHeight
         }
     }
@@ -29,6 +29,11 @@ class DividerDecoration(context: Context) : RecyclerView.ItemDecoration() {
 
         for (i in 0..parent.childCount - 1) {
             val child = parent.getChildAt(i)
+            val adapter = parent.adapter
+            val adapterPos = parent.getChildAdapterPosition(child)
+            if (adapterPos == state.itemCount - 1 ||
+                    adapter.getItemViewType(adapterPos) == AdapterConstants.GROUP ||
+                    adapter.getItemViewType(adapterPos + 1) == AdapterConstants.GROUP) continue
             val params = child.layoutParams as RecyclerView.LayoutParams
             val top = child.bottom + params.bottomMargin
             val bottom = top + divider.intrinsicHeight
