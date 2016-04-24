@@ -26,7 +26,6 @@ class DividerDecoration(context: Context) : RecyclerView.ItemDecoration() {
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         val left = parent.paddingLeft
         val right = parent.width - parent.paddingRight
-        val adapter = parent.adapter
 
         for (i in 0..parent.childCount - 1) {
             val child = parent.getChildAt(i)
