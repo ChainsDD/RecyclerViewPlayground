@@ -18,6 +18,9 @@ class PinnedHeaderDecoration(context: Context, type: Int) : RecyclerView.ItemDec
     val rect = Rect()
 
     override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+        // If there aren't any children in the RecyclerView, don't even bother
+        if (state.itemCount == 0) return
+
         // If we don't have a view holder yet, create it, and set up
         // the rect
         if (holder == null) {
