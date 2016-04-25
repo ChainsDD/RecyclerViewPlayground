@@ -22,8 +22,6 @@ class PinnedHeaderDecoration(context: Context, type: Int) : RecyclerView.ItemDec
         // the rect
         if (holder == null) {
             holder = parent.adapter.createViewHolder(parent, type)
-            val child = parent.getChildAt(0)
-            rect.set(child.left, child.top, child.right, child.bottom)
         }
 
         var doDraw = true
@@ -33,15 +31,16 @@ class PinnedHeaderDecoration(context: Context, type: Int) : RecyclerView.ItemDec
             if (firstChild.top > 0) {
                 doDraw = false
             }
+            rect.set(firstChild.left, firstChild.top, firstChild.right, firstChild.bottom)
         } else {
             var firstGroup: View? = null
             for (i in 1..parent.childCount - 1) {
                 firstGroup = parent.getChildAt(i)
-                if (parent.getViewType(firstGroup) == AdapterConstants.GROUP) break
-            }
-            if (firstGroup != null) {
-                if (firstGroup.top < rect.height()) {
-                    top = firstGroup.top - rect.height()
+                if (parent.getViewType(firstGroup) == AdapterConstants.GROUP) {
+                    rect.set(firstGroup.left, firstGroup.top, firstGroup.right, firstGroup.bottom)
+                    if (firstGroup.top < rect.height()) {
+                        top = firstGroup.top - rect.height()
+                    }
                 }
             }
         }
