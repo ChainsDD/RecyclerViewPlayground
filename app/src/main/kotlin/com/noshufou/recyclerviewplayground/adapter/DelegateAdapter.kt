@@ -13,6 +13,7 @@ import java.util.*
  */
 
 class DelegateAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    val TAG = "DelegateAdapter"
     private var groups: ArrayList<GroupItem>
     private var items: ArrayList<ViewType>
     private var delegateAdapters = SparseArrayCompat<ViewTypeDelegateAdapter>()
@@ -33,7 +34,14 @@ class DelegateAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        delegateAdapters.get(getItemViewType(position)).onBindViewHolder(holder, this.items[position])
+        val item = this.items[position]
+        if (holder is GroupDelegateAdapter.GroupViewHolder &&
+                item is PersonItem) {
+            delegateAdapters.get(AdapterConstants.GROUP)
+                    .onBindViewHolder(holder, groups[item.group - 1])
+        } else {
+            delegateAdapters.get(getItemViewType(position)).onBindViewHolder(holder, item)
+        }
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -51,6 +59,7 @@ class DelegateAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     fun addGroups(groups: List<GroupItem>) {
+        this.groups.addAll(groups)
         items.addAll(groups)
     }
 

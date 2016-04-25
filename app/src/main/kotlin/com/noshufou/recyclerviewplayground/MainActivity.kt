@@ -9,6 +9,7 @@ import com.noshufou.recyclerviewplayground.adapter.DelegateAdapter
 import com.noshufou.recyclerviewplayground.common.GroupItem
 import com.noshufou.recyclerviewplayground.common.PersonItem
 import com.noshufou.recyclerviewplayground.ui.DividerDecoration
+import com.noshufou.recyclerviewplayground.ui.PinnedHeaderDecoration
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import java.util.*
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(it, "Replace with your own action", Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show() }
         recycler.layoutManager = LinearLayoutManager(this)
+        recycler.addItemDecoration(PinnedHeaderDecoration(this, AdapterConstants.GROUP))
         recycler.addItemDecoration(DividerDecoration(this, AdapterConstants.PERSON))
 
         initAdapter()
