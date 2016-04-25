@@ -55,5 +55,4 @@ class PinnedHeaderDecoration(context: Context, type: Int) : RecyclerView.ItemDec
             c.restore()
         }
     }
-
 }
