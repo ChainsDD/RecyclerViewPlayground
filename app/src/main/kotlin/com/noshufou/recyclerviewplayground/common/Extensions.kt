@@ -13,6 +13,10 @@ import android.view.ViewGroup
 fun ViewGroup.inflate(layoutId: Int, attachToRoot: Boolean = false)
         = LayoutInflater.from(context).inflate(layoutId, this, attachToRoot)
 
+val ViewGroup.views: List<View> get() = (0 until childCount).map { getChildAt(it) }
+
+operator fun ViewGroup.get(pos: Int): View = getChildAt(pos)
+
 fun RecyclerView.getViewType(view: View) = adapter.getItemViewType(getChildAdapterPosition(view))
 
 val Any.TAG: String get() = this.javaClass.simpleName
