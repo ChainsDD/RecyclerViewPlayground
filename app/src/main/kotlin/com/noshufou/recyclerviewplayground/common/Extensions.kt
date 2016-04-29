@@ -1,6 +1,7 @@
 package com.noshufou.recyclerviewplayground.common
 
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,3 +14,5 @@ fun ViewGroup.inflate(layoutId: Int, attachToRoot: Boolean = false)
         = LayoutInflater.from(context).inflate(layoutId, this, attachToRoot)
 
 fun RecyclerView.getViewType(view: View) = adapter.getItemViewType(getChildAdapterPosition(view))
+
+val Any.TAG: String get() = this.javaClass.simpleName
