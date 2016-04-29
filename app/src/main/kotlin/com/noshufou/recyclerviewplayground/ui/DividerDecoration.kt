@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.noshufou.recyclerviewplayground.R
 import com.noshufou.recyclerviewplayground.adapter.AdapterConstants
+import com.noshufou.recyclerviewplayground.common.views
 
 /**
  * Created by Adam on 4/23/2016.
@@ -28,8 +29,7 @@ class DividerDecoration(context: Context, type: Int) : RecyclerView.ItemDecorati
         val left = parent.paddingLeft
         val right = parent.width - parent.paddingRight
 
-        for (i in 0..parent.childCount - 1) {
-            val child = parent.getChildAt(i)
+        for (child in parent.views) {
             val adapter = parent.adapter
             val adapterPos = parent.getChildAdapterPosition(child)
             if (adapterPos == state.itemCount - 1 ||
